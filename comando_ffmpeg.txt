@@ -1,0 +1,5 @@
+ffmpeg -i speech-to-text/video.mp4 speech-to-text/audio.wav
+
+ffmpeg -i speech-to-text/1544732073640.mp4 speech-to-text/1544732073640.wav
+
+ffmpeg -i speech-to-text/1544731969602.mp4 -vn -acodec pcm_s16le -ar 44100 -ac 2 speech-to-text/1544731969602.wav
