@@ -1,0 +1,4 @@
+pyarlo
+boto3
+botocore
+requests
