@@ -1,0 +1,53 @@
+cnx = mysql.connector.connect(user='', password='',host='.us-east-1.rds.amazonaws.com',database='cameradb')
+
+CREATE TABLE registros (timestamp DATE, arlocamera VARCHAR(20), statusconectada BOOL, bateria DECIMAL(2));
+
+INSERT INTO registros VALUES ('2018-05-30 02:00:06.893286','<ArloCamera: Churrasqueira>','True','0.96');
+INSERT INTO registros VALUES ('2018-05-30 02:00:06.893286','<ArloCamera: Quarto>','True','0.81');
+INSERT INTO registros VALUES ('2018-05-30 02:00:06.893286','<ArloCamera: Cozinha>','False','0.43');
+
+ATUALIZAÇÃO:
+
+mysql> update registros set arlocamera = '<ArloCamera: Churrasqueira>' where registro_id = 4;
+
+
+--------------
+COMANDOS NO MYSQL:
+
+$ mysql -h dbtonanuvem.c9sdzu2icdqg.us-east-1.rds.amazonaws.com -u login -p
+
+
+mysql> show databases;
+
+mysql> use cameradb;
+
+mysql> SHOW TABLES;
++--------------------+
+| Tables_in_cameradb |
++--------------------+
+| registros          |
++--------------------+
+
+mysql> DESCRIBE registros;
++-----------------+--------------+------+-----+---------+----------------+
+| Field           | Type         | Null | Key | Default | Extra          |
++-----------------+--------------+------+-----+---------+----------------+
+| registro_id     | int(11)      | NO   | PRI | NULL    | auto_increment |
+| timestamp       | datetime     | YES  |     | NULL    |                |
+| arlocamera      | varchar(50)  | YES  | MUL | NULL    |                |
+| statusconectada | tinyint(1)   | YES  |     | NULL    |                |
+| bateria         | decimal(2,2) | YES  |     | NULL    |                |
++-----------------+--------------+------+-----+---------+----------------+
+
+mysql> select * from registros;
+
+
+
+COMO EXPORTAR EM CSV:
+
+[ec2-user@ip-172-31-31-216 camera]$ ./bin/python3 ./savetocsv.py
+
+
+mysql -u root -p -h db.id.us-east-1.rds.amazonaws.com
+
+select * from registros into outfile 'registros.cvs' fields enclosed by '"' terminated by ';' escaped by '"' lines terminated by '\r\n';
