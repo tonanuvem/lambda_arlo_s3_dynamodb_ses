@@ -1,0 +1,46 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'twitterPollerRetweeter Sample SAM Template for twitterPollerRetweeter
+
+  '
+Globals:
+  Function:
+    Timeout: 30
+Resources:
+  RetweetFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://codigobot/bc59017ca7df1ce106cab7f8ede3bdb6
+      Handler: app.lambda_handler
+      Runtime: python3.6
+      AutoPublishAlias: live
+      Environment:
+        Variables:
+          TweetSearchString: FIAP
+      Policies:
+      - CloudWatchPutMetricPolicy: {}
+      Tracing: Active
+      Events:
+        RetweetEvent:
+          Type: Api
+          Properties:
+            Path: /hello
+            Method: get
+      Description: ''
+Outputs:
+  RetweetFunction:
+    Description: Retweet Lambda Function ARN
+    Value:
+      Fn::GetAtt:
+      - RetweetFunction
+      - Arn
+  RetweetFunctionIamRole:
+    Description: Implicit IAM Role created for TwitterPoller function
+    Value:
+      Fn::GetAtt:
+      - RetweetFunctionRole
+      - Arn
+  RetweetApi:
+    Description: API Gateway endpoint URL for Prod stage for Hello World function
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/
