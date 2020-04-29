@@ -28,14 +28,14 @@ def retweet(api, search, numberOfTweets):
     for tweet in tweepy.Cursor(api.search, search).items(numberOfTweets):
         try:
             tweet_id = tweet.id
-            print("ID = " + tweet_id)
+            #print("ID = " + str(tweet_id))
             # Create a tweet
-            api.update_status("Hello Tweepy")
-            print("Hello Tweepy")
-            if tweet.lang == "en":
+            # api.update_status("Hello Tweepy")
+            print("Hello Tweepy: " + tweet.lang)
+            if tweet.lang in ("pt","es","en"):
                 #print(tweet.body)
                 tweet.retweet()
-                print('Retweeted the tweet')
+                print('Retweeted the tweet: ' + str(tweet_id))
             else:
                 print('no retweet')
         except tweepy.TweepError as e:
@@ -50,7 +50,7 @@ def lambda_handler(event, context):
         
         searchString = os.environ['TweetSearchString']
         
-        numberOfTweets = 5
+        numberOfTweets = 15
         print('String to look for: {0} and nb of tweets to retrieve: {1}'.format(searchString,numberOfTweets))
         
         retweet(apiuse, searchString, numberOfTweets)
