@@ -18,12 +18,17 @@ AWS quick start application templates:
         1 - Hello World Example
 Template selection: 1
 
-
-> . .venv/bin/activate
-
 -
 
 > cd sam-app
+
+-
+
+> python3 -m venv .venv
+> . .venv/bin/activate
+> pip install -r requirements.txt
+
+-
 
 Build:
 
