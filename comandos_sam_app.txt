@@ -1,7 +1,7 @@
 Link 1: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-getting-started-hello-world.html
 Link 2: https://github.com/aws-samples/aws-twitterbot-workshop/blob/master/Bot1/README.md
-
-> sam init
+ 
+> sam init --runtime python3.6
 Which template source would you like to use?
         1 - AWS Quick Start Templates
 Choice: 1
