@@ -32,7 +32,8 @@ Template selection: 1
 
 Build:
 
-> sam build --use-container
+> sam build --debug
+> sam build --use-container --debug
 
 In the hello_world directory, package code, first get the packages updated using pip3
 pip3 install -r requirements.txt -t build/
