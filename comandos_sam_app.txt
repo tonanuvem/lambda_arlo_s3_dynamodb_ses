@@ -34,6 +34,7 @@ Build:
 
 > sam build --debug
 > sam build --use-container --debug
+> ls .aws-sam/build/HelloWorldFunction/*.py
 
 In the hello_world directory, package code, first get the packages updated using pip3
 pip3 install -r requirements.txt -t build/
